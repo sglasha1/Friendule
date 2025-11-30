@@ -21,6 +21,7 @@ import {google} from 'googleapis';
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 // The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
+const BASE_URL = process.env.BASE_URL || "http://localhost:1234";
 
 // create a new instance of an Express application
 // express() is an application factory, a function that returns an object)
@@ -85,7 +86,7 @@ app.route("/send_calendar")
       res.redirect("create_calendar");
     }
     else {
-      res.render("send_calendar.ejs", {user: username, calendarUrl: calendarUrl});
+      res.render("send_calendar.ejs", {user: username, calendarUrl: calendarUrl, baseUrl: BASE_URL});
     }
   })
 
