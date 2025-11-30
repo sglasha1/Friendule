@@ -1,6 +1,14 @@
 import sqlite3 from 'sqlite3';
 const sql = sqlite3.verbose();
 
+import path from 'node:path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const dbPath = path.join(__dirname, 'database.db');
+
+
 function connected(err) {
     if (err) {
         console.log(err.message);
@@ -9,7 +17,7 @@ function connected(err) {
     console.log('SQLite3 database: database.db created or already exists.');
 }
 
-const DB = new sql.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, connected);
+const DB = new sql.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, connected);
 
 
 // Create tables if they don’t exist
