@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+    <link rel="stylesheet" href = "/public/css/profile.css">
+
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <h1 style = "margin-top: 50px; margin-left: 100px">
+      <% if (user && user.username) { %>
+        Profile | <%= user.username %> | <a href="/logout">Log out</a>
+      <% } else { %>
+        Welcome!
+      <% } %>
+    </h1>
+    <div class="container-fluid" style="margin-top: 50px; width: auto">
+    <div class="row justify-content-center row-cols-3" style="width: 100%; margin-left: 0%; margin-right: 0%">
+        <div class="col text-start">
+            <div class="row row-cols-auto">
+                <div class="col"><h4><strong>My Calendars</strong></h4></div>
+                <div class="col"><p><a href="/create_calendar">Create New</a></p></div>
+            </div>
+            <% for (let i = 0; i < calendars.length; i++) {%>
+              <br>
+            <div class="row row-cols-2">
+                <div class="col">
+                    <h3><%= calendars[i].title%></h3>
+                    <p><%= calendars[i].info%></p>
+                    <% const new_url = "finished_calendar/" + calendars[i].url%> 
+                    <p><a href = <%= new_url%>>View Calendar</a></p>
+                </div>
+                <div class="calendar" data-url = "<%= calendars[i].url %>">
+                    <% function numDays(startDate, endDate) { %>
+                    <%    const start_date = new Date(startDate); %>
+                    <%    const end_date = new Date(endDate);%>
+                    <%    const millis = end_date.getTime() - start_date.getTime();%>
+                    <%    const days = millis/(1000 * 60 * 60 * 24); %>
+                    <%    return days + 1; %>
+                    <% }   %>
+                    <div class="flexboxnowidth">
+                        <div class="empty">
+                        </div>
+                        <% for (let j = calendars[i].start_time; j <= calendars[i].end_time; j++) { %>
+                            <div class="time">
+                                <p><%= j %>:00</p>
+                            </div>
+                        <% } %>
+                    </div>
+                    <% for (let j = 0; j < numDays(calendars[i].start_date, calendars[i].end_date); j++) {%>
+                        <div class="dayflexbox">
+                            <div class="date_header">
+                                <% let eventDate = (new Date(new Date(calendars[i].start_date).getTime() + (j * 24 + 5) * 60 * 60 * 1000)).toString().split(' ').slice(1, 3).join(' '); %>
+                                <p>
+                                    <%= eventDate %>
+                                </p>
+                            </div>
+                            <% for (let k = calendars[i].start_time; k <= calendars[i].end_time; k++) { %>
+                                <div class="hour_timeslot_togglable">
+                                    <% for (let l = 0; l < 4; l++) { %>
+                                        <div class="gray slot" data-date="<%= j.toString() %>" data-hour="<%= k.toString() %>" data-quarter="<%=l.toString()%>" data-starttime="<%= calendars[i].start_time.toString() %>" data-startdate= "<%= calendars[i].start_date %>"></div>
+                                        
+                                    <% } %>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <div class="col-auto d-flex justify-content-center">
+          <div class="vr flex-grow-1" style="height: 100%;"></div>
+        </div>
+        <div class="col text-start">
+            <div class="row row-cols-auto">
+                <div class="col"><h4><strong>Reminders</strong></h4></div>
+                <div class="col"><p><a href="/update_reminder">Create New</a></p></div>
+            </div>
+            <% num_reminders = reminders.length; %>
+            <% if(num_reminders === 0){ %>
+              <p>You have no reminders ... yet!</p>
+            <% }else{ %>
+            <p>Reminders:</p>
+            <% reminders.forEach(reminder =>{ %>
+            <div class="row row-cols-2 align-items-center">
+                <!-- Reminder column 1 -->
+                <div class="col">
+                  <!-- Event #1 Dropdown -->
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= reminder.id %>" aria-expanded="false" aria-controls="collapse-<%= reminder.id %>">
+                          <%= reminder.friend %>
+                        </button>
+                      </h2>
+                      <div id="collapse-<%= reminder.id %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <%= reminder.description %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                    <p><u><a href="/update_reminder">Edit</a></u></p>
+                </div>
+            </div>
+            <br>
+          <% })} %>
+        
+          <hr>
+          <div class="row mt-3">
+            <% const num = friends.length; %>
+            <% if(num === 0){ %>
+              <div class="row row-cols-auto">
+                <div class="col"><p>You have no friends ... yet!</p></div>
+                <div class="col"><p><a href="/update_friends">Create New</a></p></div>
+            </div>
+            <%}else{ %>
+              <h4><strong>All Friends</strong></h4>
+              <% friends.forEach(friend => { %>
+              <div class="row row-cols-3 align-items-center">
+                <div class="col" style="width: 100px;">
+                  <img src="
+                  <% if (friend.image_path) {%>
+                    <%=friend.image_path%>
+                  <%} %>" style="max-width: 100%;">
+                </div>
+                <div class="col">
+                    <p><%= friend.name %></p>
+                    <button class="friend-details mb-3" data-target="text-<%= friend.id %>">Show Details</button>
+                    <p id="text-<%= friend.id %>" class="hidden"> <%= friend.description %> </p>
+                </div>
+                <div class="col">
+                    <p><a href = "update_friends">Edit</a></p>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <p>Last seen <% if (friend.last_seen) { %> <%=friend.last_seen%><% } else { %>unknown<%}%>. Update date below:</p>
+                <div id="friend_update_msg-<%= friend.id %>" style="margin-top: -10px; margin-bottom: 5px"></div>
+                <input type="date" class = "last_seen_input" data-friend-id="<%= friend.id %>" style="margin-left: 10px; max-width: 20%;">
+              </div>
+              <hr style="margin-top: 20px; margin-left: 10px; width: 97%;">
+              
+            <% }) }%>
+            <div id="send_emails">
+              <div id="email_msg"></div>
+              <p>Send an email to your designated mailing list! Revise mailing list <a href=update_friends>here</a>!</p>
+              <div class="form-group" style="width: 500px;">
+                <textarea class="form-control" id="emails" rows="4"></textarea>
+                <br>
+                <button type="submit" class="btn btn-primary mb-2" id="submit_email">Send</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/profile.js"></script>
+    <script src="/js/profileCal.js"></script>
+</body>
+</html>

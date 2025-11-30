@@ -1,0 +1,26 @@
+.mainContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 0;
+}
+
+.RegBox{
+    border: 4px solid rgb(0, 0, 0);
+    padding: 20px;
+    width: 1000px;
+    text-align: center;
+    margin: 40px auto;
+}
+
+.message{
+    text-align: center;
+}
+
+.register{
+    background-color: rgb(148, 255, 148);
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 12px;
+}

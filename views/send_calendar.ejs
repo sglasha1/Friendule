@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Friends</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <div id = "body" style="margin-left: 100px; margin-right: 100px">
+    <h1 class="message" style="margin-top: 50px"> Send Calendar </h1>
+    <p>Thanks for creating a calendar!</p>
+    <p>Use the following link: <a href="http://localhost:1234/finished_calendar/<%= calendarUrl %>">http://localhost:1234/finished_calendar/<%= calendarUrl %></a> or code <strong><%= calendarUrl %></strong> on the home page.</p>
+    <p>Alternatively, enter a list of emails, separating each email with a newline, to send them the calendar link.</p>
+    <div class="form-group" style="width: 800px;">
+        <textarea class="form-control" id="emails" rows="4"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary mb-2" id="submit">Send</button>
+    </div>
+  </div>
+      <script src="/public/js/send_calendar.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,133 @@
+.hidden{
+    display: none;
+}
+
+.friend-details{
+    background-color: #4CAF50; 
+    color: white;
+    border: none;            
+    border-radius: 40px;
+    padding: 8px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calendar {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    overflow: auto;
+    padding: 0%;
+}
+
+.flexboxnowidth {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: white;
+    max-width: 45px;
+}
+
+.empty {
+    height: 32px;
+}
+
+.time {
+    margin-left: auto;
+    height: 30px;
+}
+
+.time p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+.dayflexbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1 1;
+    min-width: 55px;
+}
+
+.date_header {
+    flex: 1;
+    margin: auto;
+}
+
+.date_header p {
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+    font-size: 0.8rem;
+}
+
+.hour_timeslot, .hour_timeslot_togglable {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    border: solid white 1px;
+}
+
+.hour_timeslot > *,.hour_timeslot_togglable > * {
+    flex: 1;
+}
+
+.gray {
+    background-color: lightgray;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellowgreen {
+    background-color: yellowgreen;
+}
+
+.vr {
+  border-left: 2px solid;
+}
+
+.Bad4{
+    background-color: rgb(150, 0, 0);
+}
+
+.Bad3{
+    background-color: rgb(150, 45, 0);
+}
+
+.Bad2{
+    background-color: rgb(150, 90, 0);
+}
+
+.Bad1{
+    background-color: rgb(150, 135, 0);
+}
+
+.Neutral{
+    background-color: rgb(120, 128, 0);
+}
+
+.Good1{
+    background-color:rgb(105, 128, 0);
+}
+
+.Good2{
+    background-color:rgb(70, 128, 0);
+}
+
+.Good3{
+    background-color:rgb(35, 128, 0);
+}
+
+.Good4{
+    background-color:green;
+}

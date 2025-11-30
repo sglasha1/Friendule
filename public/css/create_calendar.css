@@ -1,0 +1,119 @@
+#text_body {
+    padding: 5%;
+    margin-top: -50px;
+}
+
+#event-info p {
+    margin-bottom: 0 !important; 
+    margin-top: 1rem !important;
+}
+
+textarea {
+    width: 100%;
+}
+
+.fill {
+    flex: 1;
+}
+
+.fill p {
+    margin-bottom: 0 !important; 
+    margin-top: 1rem !important;    
+}
+
+.center {
+    align-self: center;
+}
+
+.center p {
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+}
+
+.non-white {
+    height: 30px;
+}
+
+.non-white p {
+    text-align: right;
+    margin-bottom: 0 !important; 
+}
+
+.white {
+    background-color: white;
+    max-height: 30px;
+    box-sizing: border-box;
+}
+
+#title {
+    color: brown;
+    padding: 1%;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    max-width: 1000px;
+}
+
+#info {
+    flex: 1;
+    padding: 1%;
+}
+
+#main-info {
+    display: flex;
+    flex-direction: row; 
+}
+
+#calendar {
+    background-color: lightgray;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 30px;
+    column-gap: 1%;
+    row-gap: 0;
+}
+
+#calendar > div {
+    margin: 0;
+    padding: 0;
+}
+
+#calendar p {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+#calendar button {
+    height: auto;
+    border-radius: 0;
+}
+
+#bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+#bottom p {
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+}
+
+#submit {
+    margin-left: auto;
+    border-radius: 10px;
+    background-color: brown;
+    color: white;
+}
+
+#duration {
+    width: 50px;
+}
+
+#error {
+    color: red;
+}

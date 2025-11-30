@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Friends</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <h1 style = "margin-top: 50px; margin-left: 100px">Manage Friends</h1>
+    <div class="container" style="margin-top: 50px; width: auto;">
+      <div class="row justify-content-center">
+        <div class="col text-start">
+          <div><h3>Add Friends</h3></div>
+          <div id="addFriendMessage"></div>
+          <br>
+          <form id="add_friend">
+          <div class="mb-3" style="margin-right:30px">
+            <label for="add_friend_name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="add_friend_name" placeholder="Name" required>
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="add_friend_img" class="form-label">Photograph (Optional)</label>
+            <input type="file" class="form-control" id="add_friend_img" accept="image/*">
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="add_friend_desc" class="form-label">Description (Optional)</label>
+            <textarea class="form-control" id="add_friend_desc" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="add_friend_submit">Submit</button>
+        </form>
+        </div>
+      
+
+        <div class="col-auto d-flex justify-content-center">
+          <div class="vr" style="height: 100%;"></div>
+        </div>
+
+        <div class="col text-start">
+          <div><h3>Update Friends</h3></div>
+          <div id="editFriendMessage"></div>
+          <br>
+          <form id="updateFriendForm">
+          <select class="selectpicker" data-live-search="true" id="editFriendChoice">
+            <option value="" disabled selected>Select a friend...</option>
+            <% for (let i=0; i<rows.length; i++) { %>
+              <option><%= rows[i].name %></option>
+            <% } %>
+          </select>
+          <div class="mb-3" style="margin-right:30px">
+            <br>
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="edit_friend_name" placeholder="Name">
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="update_friend_img" class="form-label">Photograph (Optional)</label>
+            <input type="file" class="form-control" id="update_friend_img" accept="image/*">
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="description" class="form-label">Description (Optional)</label>
+            <textarea class="form-control" id="edit_friend_desc" rows="3"></textarea>
+          </div>
+          <div class="row">
+            <div class="col">
+            <button type="button" class="btn btn-primary" id="update_friend_submit">Submit</button>
+            <button type="button" class="btn btn-primary" id="delete_friend_submit">Delete Friend</button>
+            </div>
+          </div>
+        </form>
+        </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div class="container" style="margin-top: 50px; width: auto;">
+      <div class="row justify-content-left">
+        <h3 style="margin-bottom: 10px">Update Friend Mailing List</h3>
+        <div id="mailing_list_msg"></div>
+        <div class="form-group" style="width: 800px;">
+          <textarea class="form-control" id="emails" rows="4"><%= emails.join('\n') %></textarea>
+          <br>
+          <button type="submit" class="btn btn-primary mb-2" id="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/update_friends.js"></script>
+</body>
+</html>

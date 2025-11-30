@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Reminders</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <h1 style = "margin-top: 50px; margin-left: 100px">Manage Reminders</h1>
+    <div class="container" style="margin-top: 50px; width: auto;">
+      <div class="row justify-content-center">
+        <div class="col text-start">
+          <div><h3>Add Reminders</h3></div>
+          <div id="reminder_notif"></div>
+          <br>
+          <div class="mb-3" style="margin-right:30px">
+            <form id="addReminderForm">
+            <label for="name" class="form-label">Name</label>
+            <br>
+            <select class="selectpicker" data-live-search="true" id="nameSelect" required>
+              <option value="" disabled selected>Select a friend...</option>
+              <% friends.forEach(friend => { %>
+              <option><%= friend.name %></option>
+              <% })%>
+            </select>
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="addSelect" class="form-label">Reminder Frequency</label>
+            <select id="addSelect" class="form-select" required>
+              <option value="">Select frequency...</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <!-- <option value="custom" id="custom_days">Custom</option> -->
+            </select>
+          </div>
+          <div class="mb-3 d-none" id="showDaysAdd" style="margin-right:30px">
+            <label for="customDays" class="form-label">Every X days</label>
+            <input type="number" min="1" class="form-control" placeholder="Enter number of days">
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="description" class="form-label">Description (Optional)</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="add_reminder_submit">Submit</button>
+          </form>
+        </div>
+
+        <div class="col-auto d-flex justify-content-center">
+          <div class="vr" style="height: 100%;"></div>
+        </div>
+        <div class="col text-start">
+          <div><h3>Update Reminders</h3></div>
+          <p id="update_notif"></p>
+          <br>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="name" class="form-label">Friend's Name</label>
+            <br>
+            <select class="selectpicker" data-live-search="true" id="nameSelect2">
+              <option value="" selected disabled>Select a friend</option>
+              <% friends.forEach(friend => { %>
+              <option><%= friend.name %></option>
+              <% })%>
+            </select>
+          </div>
+          <div id="reminderMenu">
+          <p style="margin-bottom: 3px">Reminders Set:</p>
+            <select class="selectpicker" data-live-search="true" id="selectReminder">
+            </select>
+          </div>
+          <br>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="addSelect2" class="form-label">Reminder Frequency</label>
+            <select id="addSelect2" class="form-select">
+              <option value="">Select frequency...</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <!-- <option value="custom" id="custom_days">Custom</option> -->
+            </select>
+          </div>
+          <div class="mb-3 d-none" id="customDaysDiv" style="margin-right:30px">
+            <label for="customDays" class="form-label">Every X days</label>
+            <input type="number" min="1" class="form-control" placeholder="Enter number of days">
+          </div>
+          <div class="mb-3" style="margin-right:30px">
+            <label for="description" class="form-label">Description (Optional)</label>
+            <textarea class="form-control" id="description2" rows="3"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" id="updateReminderSaveButton">Save</button>
+          <button type="button" class="btn btn-primary" id="delete_reminder_submit">Delete Reminder</button>
+        </div>
+           
+        </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/update_reminder.js"></script>
+</body>
+</html>

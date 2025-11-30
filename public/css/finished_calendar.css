@@ -1,0 +1,287 @@
+#text_body {
+    padding: 5%;
+    margin-top: -50px;
+
+}
+
+.optimal-time{
+    background-color: #4CAF50; 
+    color: white;
+    border: none;            
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fill {
+    flex: 1;
+}
+
+.fill p {
+    margin-bottom: 0 !important; 
+    margin-top: 1rem !important;    
+}
+
+.center {
+    align-self: center;
+    display: grid;
+}
+
+.center > * {
+    border-radius: 10px;
+    justify-self: center;
+}
+
+.center p {
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+}
+
+.non-white {
+    height: 40px;
+}
+
+.non-white p {
+    text-align: right;
+    margin-top: 0 !important; 
+    padding-top: 0 !important;
+}
+
+.white {
+    background-color: white;
+    max-height: 40px;
+    display: flex;
+    flex-direction: column;
+    border-left: solid black 1px;
+    border-right: solid black 1px;
+    border-top: solid lightgray 1px;
+}
+
+.white div {
+    flex: 1;
+}
+
+#sign-in-code {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+#sign-in-code p {
+    margin: 0;
+    padding: 0;
+}
+
+#title {
+    color: brown;
+}
+
+#title-stuff, #event-info {
+    flex: 1;
+}
+
+#top {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+#button-toggle {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+#button-toggle > * {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+#button-toggle p {
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+}
+
+#preferencesold {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#preferences {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3%;
+}
+
+#unavailable p, #available p, #preferred p{
+    margin-bottom: 0;
+}
+
+#unavailable div, #available div, #preferred div{
+    border: solid black 2px;
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 36px;
+}
+
+
+#save {
+    margin: auto;
+    border-radius: 10px;
+    background-color: brown;
+    color: white;
+}
+
+#save p {    
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.gray {
+    background-color: lightgray;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellowgreen {
+    background-color: yellowgreen;
+}
+
+.Bad4{
+    background-color: rgb(185, 33, 33);
+}
+
+.Bad3{
+    background-color: rgb(233, 96, 38);
+}
+
+.Bad2{
+    background-color: rgb(238, 159, 40);
+}
+
+.Bad1{
+    background-color: rgb(231, 210, 27);
+}
+
+.Neutral{
+    background-color: rgb(228, 221, 147);
+}
+
+.Good1{
+    background-color:rgb(0, 130, 45);
+}
+
+.Good2{
+    background-color:rgb(0, 160, 45);
+}
+
+.Good3{
+    background-color:rgb(0, 190, 45);
+}
+
+.Good4{
+    background-color:rgb(0, 220, 52);
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1 1;
+}
+
+.flexboxnowidth {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: white;
+    max-width: 45px;
+}
+
+
+.dayflexbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1 1;
+    min-width: 100px;
+}
+
+.empty {
+    flex: 1;
+}
+
+.time {
+    flex: 1;
+    margin-left: auto;
+}
+
+.time p {
+    margin: 1px;
+}
+
+#all_schedules {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    overflow: auto;
+}
+
+#your_schedule {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    overflow: auto;
+}
+
+.date_header {
+    flex: 1;
+    margin: auto;
+}
+
+.date_header p {
+    margin-bottom: 0.5rem !important; 
+    margin-top: 0.5rem !important;
+}
+
+.hour_timeslot, .hour_timeslot_togglable {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    border: solid white 1px;
+}
+
+.hour_timeslot > *,.hour_timeslot_togglable > * {
+    flex: 1;
+}
+
+#error {
+    color: red;
+}

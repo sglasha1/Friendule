@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Calendar</title>
+    <link rel="stylesheet" href="/css/create_calendar.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <div id="text_body">
+    <div id="title">
+        <h1>Create Calendar</h1>
+    </div>
+    <div id="content">
+        <div id="info">
+            <div id="main-info">
+                <div class="fill">
+                    <p>Event Title</p>
+                    <input type="text" placeholder = "Value" id="eventTitle">
+                    <p>Start Date</p>
+                    <input type="date" id="startDate">
+                    <p>Start Time</p>
+                    <select name="startTime" id="startTime">
+                        <% for (let i = 1; i <= 12; i++) { %>
+                        <option value="<%= i %>"><%= i %>:00</option>
+                        <% } %>
+                    </select>
+                    <select name="startTimeAMPM" id="startTimeAMPM">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+                <div class="fill">
+                    <p>Event Duration (optional)</p>
+                    <input type="text" id="duration"> minutes
+                    <p>End Date</p>
+                    <input type="date" id="endDate">
+                    <p>End Time</p>
+                    <select name="endTime" id="endTime">
+                        <% for (let i = 1; i <= 12; i++) { %>
+                        <option value="<%= i %>"><%= i %>:00</option>
+                        <% } %>
+                    </select>
+                    <select name="endTimeAMPM" id="endTimeAMPM">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+            </div>
+            <div id="event-info">
+                <p>Event info (optional)</p>
+                <textarea placeholder = "Insert event info..." id="eventInfo"></textarea>
+            </div>
+            <div id="bottom">
+                <% if (!user) { %>
+                <p>Have an account? <a href="login">Login</a> to save your calendar.</p>
+                <% } else { %>
+                <p>This calendar will be saved to <%= user.username %>'s account. </p>
+                <% } %>
+                <button id="submit"><p>Submit</p></button>
+            </div>
+            <p id="error"></p>
+        </div>
+    </div>
+</div>
+    <script src="/public/js/create_calendar.js"></script>
+</body>
+</html>

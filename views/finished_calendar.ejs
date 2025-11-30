@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finished Calendar</title>
+    <link rel="stylesheet" href="/css/finished_calendar.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <div id="text_body">
+    <div id="top">
+        <div id="title-stuff">
+            <div id="title">
+                <h1>Add Your Availability!</h1>
+            </div>
+            <div id="sign-in-code">
+                <div>
+                    <% if (!user) { %>
+                    <p><a href="../login?next=/finished_calendar/<%= calendar.url %>">Sign in</a> or enter your name: </p>
+                    <% } else { %>
+                    <p>Your name: </p>
+                    <% } %>
+                </div>
+                <div>
+                    <input id="username" <% if (user) { %> value= <%=user%> <%}%> placeholder = "What should we call you?">
+                </div>
+                <p id="error"></p>
+            </div>
+            <div id="preferences">
+                <div id="unavailable">
+                    <p>Unavailable</p>
+                    <div class="gray" id="gray"></div>
+                </div>
+                <div id="available">
+                    <p>Available</p>
+                    <div class="yellowgreen" id="yellowgreen">✓</div>
+                </div>
+                <div id="preferred">
+                    <p>Preferred</p>
+                    <div class="green" id="green"></div>
+                </div>
+                <div>
+                    <button id="save"><p>Save</p></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="event-info">
+            <h3><%=calendar.title%></h3>
+            <p><%=calendar.info%></p>
+            <p>Happens between <strong><%= (new Date(new Date(calendar.start_date).getTime() + 5 * 60 * 60 * 1000)).toDateString() %></strong> and <strong><%= (new Date(new Date(calendar.end_date).getTime() + 5 * 60 * 60 * 1000)).toDateString() %></strong>, between <strong id="stime"><%= calendar.start_time %></strong> and <strong id="etime"><%= calendar.end_time %></strong>.</p>
+            <div id="button-toggle">
+                <button class="optimal-time" id = "bestTime"><p>Calculate Optimal Time</p></button>
+                <button class="optimal-time" id = "groupTimes"><p>Show Group Availability</p></button>
+            </div>
+            <p id="showBest"></p>
+        </div>
+    </div>
+    <div id="content">
+        <% function numDays(startDate, endDate) { %>
+        <%    const start_date = new Date(startDate); %>
+        <%    const end_date = new Date(endDate);%>
+        <%    const millis = end_date.getTime() - start_date.getTime();%>
+        <%    const days = millis/(1000 * 60 * 60 * 24); %>
+        <%    return days + 1; %>
+        <% }   %>
+
+        <div id="your_schedule">
+            <div class="flexboxnowidth">
+                <div class="empty">
+                </div>
+                <% for (let i = calendar.start_time; i <= calendar.end_time; i++) { %>
+                    <div class="time">
+                        <p><%= i %>:00</p>
+                    </div>
+                <% } %>
+            </div>
+            <% for (let i = 0; i < numDays(calendar.start_date, calendar.end_date); i++) {%>
+                <div class="dayflexbox">
+                    <div class="date_header">
+                        <% let eventDate = (new Date(new Date(calendar.start_date).getTime() + (i * 24 + 5) * 60 * 60 * 1000)).toString().split(' ').slice(0, 3).join(' '); %>
+                        <p>
+                            <%= eventDate %>
+                        </p>
+                    </div>
+                    <% for (let k = calendar.start_time; k <= calendar.end_time; k++) { %>
+                        <div class="hour_timeslot_togglable">
+                            <% for (let j = 0; j < 4; j++) { %>
+                                <div class="gray" data-date="<%= i.toString() %>" data-hour="<%= k.toString() %>" data-quarter="<%=j.toString()%>" data-starttime="<%= calendar.start_time.toString() %>" data-startdate= "<%= calendar.start_date %>"></div>
+                                
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        <div id="all_schedules">
+            <div class="flexboxnowidth">
+                <div class="empty">
+                </div>
+                <% for (let i = calendar.start_time; i <= calendar.end_time; i++) { %>
+                    <div class="time">
+                        <p><%= i %>:00</p>
+                    </div>
+                <% } %>
+            </div>
+            <% for (let i = 0; i < numDays(calendar.start_date, calendar.end_date); i++) {%>
+                <div class="dayflexbox">
+                    <div class="date_header">
+                        <% let eventDate = (new Date(new Date(calendar.start_date).getTime() + (i * 24 + 5) * 60 * 60 * 1000)).toString().split(' ').slice(0, 3).join(' '); %>
+                        <p>
+                            <%= eventDate %>
+                        </p>
+                    </div>
+                    <% for (let k = calendar.start_time; k <= calendar.end_time; k++) { %>
+                        <div class="hour_timeslot">
+                            <% for (let j = 0; j < 4; j++) { %>
+                                <div class="gray slot" data-date="<%= i.toString() %>" data-hour="<%= k.toString() %>" data-quarter="<%=j.toString()%>" data-starttime="<%= calendar.start_time.toString() %>" data-startdate= "<%= calendar.start_date %>"></div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const calendarURL = "<%= calendar.url %>";
+</script>
+<script src="/js/finished_calendar.js"></script>
+<script src="/js/schedule.js"></script>
+</html>

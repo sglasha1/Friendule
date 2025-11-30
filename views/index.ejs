@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <div class="container text-center" style="margin-top: 50px;">
+      <h1><% if (user && user.username) { %>
+        Welcome <%= user.username %>!  
+      <% } else { %>
+        Welcome!
+      <% } %>
+    </h1>
+    <div class="row" style="height: 200px; margin-top: 25px;">
+        <div class="col">
+          <h3><a href="login">Log In/Register</a></h3>
+        </div>
+        <div style="width: 100px;">
+          <div class="vr" style="height: 300px;"></div>
+        </div>
+        <div class="col">
+          <h3><a href="create_calendar">Create Calendar</a></h3>
+          <p>or find calendar with code:</p>
+          <input type="text" placeholder = "Enter code..." id="code"><button type="button"  id="submit" class="btn btn-primary" style="background-color: brown; border-color: brown;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg></button>
+          <p id ="calendarerror"></p>
+        </div>
+    </div>
+    </div>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/index.js"></script>
+</body>
+</html>

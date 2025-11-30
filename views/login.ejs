@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/public/css/style.css">
+
+    <title>Log in</title>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <h1 class="message" style="margin-top: 50px"> Log in</h1>
+    <div class = "mainContent">
+    <div class = "RegBox">
+        <h3> Welcome back! </h3>
+        Log in here.
+        <br>
+        <br>
+        <p>
+          <% if (errorMessage != '') { %>
+            <%= errorMessage %>
+          <% } %></p>
+        <form id="registration" action="/submit-login" method="POST">
+        Username: <input type ="text" name="username" placeholder="" maxlength="40" required>
+        <br>
+        <br>
+        Password: <input type ="password" name="password" placeholder="" maxlength="40" required>  
+        <br>
+        <br>
+        <button type="submit" class="register" id="create" style="background-color: brown; color: white;">
+            Log in
+        </button>
+        <input type="hidden" name="next" value="<%=next%>">
+        </form>
+        <br>
+        <br>
+        Don't have an account yet? <a href="/register"> Register </a>
+    </div>
+    </div>
+  </body>
