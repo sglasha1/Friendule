@@ -789,6 +789,19 @@ app.get("/finished_calendar/:url", async(req, res) => {
   res.render("finished_calendar.ejs", {calendar: calendar, user: username});
 });
 
+app.post("/api/calendar/get_curr_choices", async(req, res) => {
+  console.log('getting curr choices')
+  const calendarUrl = req.body.id;
+  const username = req.body.username;
+  const calendarInfo = await getCalendarInfo(calendarUrl, username);
+  if(calendarInfo !== null){
+    res.status(200).json({choices: calendarInfo})
+  }
+  else {
+    return null
+  }
+});
+
 app.post("/finished_calendar/:url", async(req, res) => {
   console.log('finished calendar')
   const calendarUrl = req.params.url;
