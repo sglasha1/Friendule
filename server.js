@@ -45,8 +45,7 @@ app.use(session({
   secret: 'mysecretkey', // 🔒 Change this to a secure random string in production
   resave: false, // resave only if session is changed
   saveUninitialized: false, // does not force a session to be saved
-  cookie: { secure: false }, // Set true if using HTTPS
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+  cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000} // Set true if using HTTPS
 }));
 
 import dotenv from 'dotenv';
@@ -383,7 +382,7 @@ app.route("/update_friends")
   })
 });
 
-app.route("send_reminder_gcal")
+app.route("/send_reminder_gcal")
 .get(async(req, res) => {
   const {name, desc, frequency, time} = req.body;
   const username = req.session.user.username;
