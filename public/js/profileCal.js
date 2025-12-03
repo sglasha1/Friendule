@@ -1,34 +1,21 @@
 function getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter){
-  console.log("In getSlotMS");
   const fifteen = 15 * 60000;
   const day = 86400000;
-  let intStartTime = parseInt(startTime);
   let intSlotHour = parseInt(slotHour);
   let intSlotQuarter = parseInt(slotQuarter);
   let intSlotDate = parseInt(slotDate);
-  console.log("intSlotQuarter:", intSlotQuarter);
   let startHour = intSlotHour;
   let quarterMS = intSlotQuarter * fifteen;
   let startDateObj = new Date(`${startDate}T${startHour.toString().padStart(2, '0')}:00:00`);
-  console.log("startDate:", startDate);
-  console.log("startHour:", startHour);
-  console.log("startDateObj:", startDateObj);
   let almostMs = startDateObj.getTime();
-  console.log("almostMs:", almostMs);
-  console.log("quarterMS:", quarterMS);
-  console.log("intSlotDate:", intSlotDate);
   let dayAdjustment = day * intSlotDate;
-  console.log("dayAdjustment:", dayAdjustment);
   let actualMs = almostMs + quarterMS + dayAdjustment;
   let endMs = actualMs + fifteen;
-  console.log("actualMs:", actualMs);
-  console.log("endMs:", endMs);
 
   return [actualMs, endMs];
 }
 
 async function heatify(startTime, calendarURL){
-    console.log("heatifying");
   const response = await fetch(`/api/calendar/${calendarURL}`);
   const data = await response.json();
   let numUsers = data.length;
@@ -93,26 +80,6 @@ function colorByScore(score){
   return newClass;
 }
 
-/*
-async function displayGroup(calSpot){
-    let boxes = calSpot.querySelectorAll(".slot");
-    for(const slot of boxes){
-    console.log("doing a slot");
-    let slotDate = slot.dataset.date;
-    let slotHour = slot.dataset.hour;
-    let slotQuarter = slot.dataset.quarter;
-    let startDate = slot.dataset.startdate;
-    let startTime = slot.dataset.starttime;
-    let timeMS = getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter);
-    let calendarURL = calSpot.dataset.url;
-    let newClass = await heatify(timeMS[0], calendarURL);
-    console.log("Going to change the class");
-    slot.classList.remove("gray");
-    slot.classList.add(newClass);
-};
-}
-*/
-
 function computeHeat(startTime, data) {
   let score = 0;
   const numUsers = data.length;
@@ -128,8 +95,6 @@ function computeHeat(startTime, data) {
   const normalized = score / numUsers;
   return colorByScore(normalized);
 }
-
-
 
 async function displayGroup(calSpot) {
   const calendarURL = calSpot.dataset.url;
@@ -148,7 +113,6 @@ async function displayGroup(calSpot) {
     const startTime = slot.dataset.starttime;
 
     const timeMS = getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter);
-
     const newClass = computeHeat(timeMS[0], data); // new function
 
     slot.classList.remove("gray");

@@ -179,8 +179,4 @@ window.addEventListener('DOMContentLoaded', () => {
     // Force select to use the placeholder option
     nameSelect.value = "";
     nameSelect2.value = "";
-    
-    // Refresh the Bootstrap Select UI
-    // $('#nameSelect').selectpicker('refresh');
-    // $('#nameSelect2').selectpicker('refresh');
 });

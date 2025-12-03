@@ -11,20 +11,10 @@ import bcrypt from 'bcrypt';
 import schedule from 'node-schedule';
 import { DB } from './dbconnection.js';
 import { nanoid } from 'nanoid';
-// import path from 'node:path';
 import process from 'node:process';
-import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
-
-// The scope for reading calendar events.
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-// The path to the credentials file.
-const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 const BASE_URL = process.env.BASE_URL || "http://localhost:1234";
-
-// create a new instance of an Express application
-// express() is an application factory, a function that returns an object)
 const app = express();
 
 const port = 1234; // choose which port to run your server on
@@ -50,7 +40,6 @@ app.use(session({
 
 import dotenv from 'dotenv';
 import sgMail from '@sendgrid/mail';
-import e from 'express';
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -725,9 +714,6 @@ async function getCalendarInfo(calendarUrl, username){
   
 }
 
-// app.get("/finished_calendar", async(req, res) => {
-//   res.render("finished_calendar.ejs");
-// });
 async function getCalendarInfo2(hashed_id){
     const sql = 'SELECT * FROM calendar_info WHERE hashed_id = ?';
     return new Promise((resolve, reject)=>{
@@ -790,11 +776,10 @@ app.get("/finished_calendar/:url", async(req, res) => {
 });
 
 app.post("/api/calendar/get_curr_choices", async(req, res) => {
-  const hashed_id = req.body.hashed_id;
+  const hashed_id = req.body.id;
   const username = req.body.username;
-
   const calendarInfo = await getCalendarInfo(hashed_id, username);
-
+  console.log(calendarInfo)
   if (calendarInfo !== null) {
     res.status(200).json({ choices: calendarInfo });
   } else {
@@ -932,12 +917,6 @@ app.post('/submit-login', async (req, res) => {
       res.render("login.ejs", { errorMessage: "No user found with username + password combination." });
     }
 else {
-    console.log(`SELECT successful:`, row);
-    console.log("Checking if passwords match...", password, row.password);
-    console.log("Username:", username);
-    console.log("Entered password:", password);
-    console.log("Stored hash:", row.password);
-    console.log("Is valid bcrypt hash?", row.password.startsWith("$2"));
     try { 
       if (await bcrypt.compare(password, row.password) ) {
           req.session.user = { username: username };

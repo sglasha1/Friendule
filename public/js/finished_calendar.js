@@ -1,48 +1,3 @@
-// send over seconds since 1970
-
-//Old function: this is for using the boxes.
-async function addPreference(){
-    // console.log("adding preference ...");
-    const username = document.getElementById("username").value;
-    const prefLevel = document.getElementById("level").value;
-    const startDate = document.getElementById("startDate").value;
-    const startTime = document.getElementById("startTime").value;
-    const startTimeAMPM = document.getElementById("startTimeAMPM").value;
-    const endTime = document.getElementById("endTime").value;
-    const endTimeAMPM = document.getElementById("endTimeAMPM").value;
-    const startString = startDate + " " + startTime + " " + startTimeAMPM;
-    const endString = startDate + " " + endTime + " " + endTimeAMPM;
-    // console.log("startString:", startString);
-    // console.log("endString:", endString);
-    const startDateObj = new Date(startString);
-    const endDateObj = new Date(endString);
-    const startMS = startDateObj.getTime();
-    const endMS = endDateObj.getTime();
-    // console.log("startMS:", startMS);
-    // console.log("endMS:", endMS);
-    const interval = [startMS, endMS];
-    let rank = " ";
-    if(prefLevel === "1"){
-        rank = 1;
-    }
-    else{
-        rank = 2;
-    }
-    const data = {username: username, preference: interval, rank: rank};
-    const path = window.location.pathname;
-
-    try {
-      const response = await fetch(path, {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-      });
-      console.log(response.text());
-    } catch (error) {
-      console.error('Error:', error);
-    }
-}
-
 async function updatePreferences(){
   const username = document.getElementById("username").value;
   const errormsg = document.getElementById("error");
@@ -51,7 +6,6 @@ async function updatePreferences(){
     return;
   }
   errormsg.innerHTML = "";
-  console.log("adding preference ...");
   const docSpot = document.getElementById("your_schedule");
   const allAvailable = Array.from(docSpot.querySelectorAll(".yellowgreen"));
   const allPreferred = Array.from(docSpot.querySelectorAll(".green"));
@@ -69,25 +23,12 @@ async function updatePreferences(){
   catch (error) {
       console.error('Error:', error);
     }
-  /*
-  console.log("Found all available");
-  console.log("Green elements:", allAvailable);
-  console.log("# of green elements:", allAvailable.length);
-  console.log("allAvailable:", allAvailable);
-  */
-  // allAvailable.forEach(async (slot) => {
-  //   console.log("Checking slot:", slot.dataset);
-  // });
 
   for(const slot of allAvailable){
     try {
-    // console.log("Working on:", slot.dataset);
-    // console.log("checking an available slot");
     let slotDate = slot.dataset.date;
-    // console.log("slotDate is originally:", slotDate);
     let slotHour = slot.dataset.hour;
     let slotQuarter = slot.dataset.quarter;
-    // console.log("slotQuarter is originally:", slotQuarter);
     let startDate = slot.dataset.startdate;
     let startTime = slot.dataset.starttime;
     let timeMS = getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter);
@@ -109,21 +50,11 @@ async function updatePreferences(){
     }
   };
 
-  
-  
-  allPreferred.forEach(async (slot) => {
-    console.log("Checking slot:", slot.dataset);
-  });
-  console.log("Preferred count:", allPreferred.length);
   for(const slot of allPreferred){
     try {
-    console.log("Working on:", slot.dataset);
-    console.log("checking a preferred slot");
     let slotDate = slot.dataset.date;
-    console.log("slotDate is originally:", slotDate);
     let slotHour = slot.dataset.hour;
     let slotQuarter = slot.dataset.quarter;
-    console.log("slotQuarter is originally:", slotQuarter);
     let startDate = slot.dataset.startdate;
     let startTime = slot.dataset.starttime;
     let timeMS = getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter);
@@ -152,34 +83,20 @@ async function updatePreferences(){
 
 
 function getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter){
-  // console.log("In getSlotMS");
   const fifteen = 15 * 60000;
   const day = 86400000;
-  let intStartTime = parseInt(startTime);
   let intSlotHour = parseInt(slotHour);
   let intSlotQuarter = parseInt(slotQuarter);
   let intSlotDate = parseInt(slotDate);
-  // console.log("intSlotQuarter:", intSlotQuarter);
   let startHour = intSlotHour;
   let quarterMS = intSlotQuarter * fifteen;
   let startDateObj = new Date(`${startDate}T${startHour.toString().padStart(2, '0')}:00:00`);
-  // console.log("startDate:", startDate);
-  // console.log("startHour:", startHour);
-  // console.log("startDateObj:", startDateObj);
   let almostMs = startDateObj.getTime();
-  // console.log("almostMs:", almostMs);
-  // console.log("quarterMS:", quarterMS);
-  // console.log("intSlotDate:", intSlotDate);
   let dayAdjustment = day * intSlotDate;
-  // console.log("dayAdjustment:", dayAdjustment);
   let actualMs = almostMs + quarterMS + dayAdjustment;
   let endMs = actualMs + fifteen;
-  // console.log("actualMs:", actualMs);
-  // console.log("endMs:", endMs);
-
   return [actualMs, endMs];
 }
-
 
 // default is selecting general availability
 currentColor = "yellowgreen"
@@ -264,29 +181,6 @@ let etimespot = document.getElementById("etime");
 stimespot.textContent = timeToString(stimespot.textContent);
 etimespot.textContent = timeToString(etimespot.textContent);
 
-
-
-async function heatify(startTime) {
-  // fetch once (displayGroup controls this)
-  const response = await fetch(`/api/calendar/${calendarURL}`);
-  const data = await response.json();
-
-  let numUsers = data.length;
-  let score = 0;
-
-  for (const row of data) {
-    let pref = JSON.parse(row.preferences);
-
-    if (matchesStart(pref.rank1, startTime)) score += 3;
-    else if (matchesStart(pref.rank2, startTime)) score += 2;
-    else score -= 3;
-  }
-
-  score = score / numUsers;
-  let newClass = colorByScore(score);
-  return newClass;
-}
-
 function matchesStart(arr, startTime) {
   for (const entry of arr) {
     if (entry[0] === startTime) return true;
@@ -306,17 +200,6 @@ function colorByScore(score) {
   return "Good4";
 }
 
-function colorByScoreCurrUser(score) {
-    if (score <= -3) return "gray";
-    if (score <= -2) return "gray";
-    if (score <= -1) return "gray";
-    if (score <=  0) return "gray";
-    if (score <=  1) return "gray";
-    if (score <=  2) return "yellowgreen";
-    if (score <= 2.5) return "yellowgreen";
-    if (score <   3) return "Good3";
-    return "Good3";
-}
 async function displayGroup() {
   let btn = document.getElementById('groupTimes');
   let allSched = document.getElementById('all_schedules');
@@ -376,12 +259,14 @@ async function display_curr_choices() {
   const id = path.split("/").pop(); 
   const data = {username: username, id: id};
   
+  console.log(data);
   try { 
     response = await fetch(`/api/calendar/get_curr_choices/`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     });
+
 
   const result = await response.json();
   const raw = result.choices.preferences;   
@@ -435,12 +320,5 @@ function displayCal() {
   this.disabled = true;
 }
 
-
-
-
 document.getElementById('groupTimes').addEventListener('click', displayGroup);
 document.getElementById('name_submit').addEventListener('click', displayCal);
-
-//TODO: do the rectangle selection
-// so basically put everything into an array and form there you can calculate which boxes should be toggled
-// this will help with lag too since even going straight will fill in all rectangles

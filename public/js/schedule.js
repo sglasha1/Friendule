@@ -4,7 +4,6 @@ function dateToLocalMs(dateStr) {
     return new Date(y, m - 1, d).getTime(); 
 }
 
-
 function quickSort(arr) {
   if (arr.length <= 1) return arr;
 
@@ -232,35 +231,3 @@ function getMaxIndex(scoreList){
 
 //TODO: implement button that triggers this
 document.getElementById('bestTime').addEventListener('click', optimalMeetingTime);
-
-/*
-let example_users1 = [{rank1: [[2, 4], [12, 14]], rank2: [[20, 24], [25, 170]]}, {rank1: [[3, 8], [22, 24]], rank2: [[6, 7], [25, 170]]}];
-
-let example_users2 = [{rank1: [[2, 4], [100, 200]], rank2: [[5, 7], [15, 17]]}, {rank1: [[5, 7], [22, 24]], rank2: [[100, 120], [16, 17]]}];
-
-let example_users3 = [{rank1: [[2, 4], [100, 200]], rank2: [[5, 7], [15, 17]]}, {rank1: [[5, 7], [22, 24]], rank2: [[201, 220], [16, 17]]}];
-
-let example_users4 = [{rank1: [[2, 4], [100, 200]], rank2: [[5, 7], [15, 17]]}, {rank1: [[300, 400], [22, 24]], rank2: [[100, 120], [16, 17]]}];
-
-let example_users5 = [{rank1: [[2, 4], [100, 200]], rank2: [[5, 7], [15, 17]]}, {rank1: [[22, 24]], rank2: [[316, 317]]}];
-
-let example_users6 = [{rank1: [[2, 4], [100, 200]], rank2: [[5, 7], [15, 17]]}, {rank1: [[4, 8], [22, 24]], rank2: [[100, 120], [18, 19]]}];
-let example_users7 = [{rank1: [[2, 4], [100, 200]], rank2: [[5, 7], [15, 17]]}, {rank1: [[4, 8], [22, 24]], rank2: [[100, 120], [18, 19]]}, {rank1: [[2, 4], [100, 200]], rank2: [[6, 17], [20, 23]]}];
-
-
-console.log(chooseMeetingTime(example_users1, 100));
-console.log(chooseMeetingTime(example_users2, 1));
-console.log(chooseMeetingTime(example_users3, 1));
-console.log(chooseMeetingTime(example_users4, 1));
-console.log(chooseMeetingTime(example_users5, 1));
-console.log(chooseMeetingTime(example_users6, 1));
-console.log("Now, on to testing the new function.");
-console.log(optimalMeetingTime(example_users1, 100, 0, 500));
-console.log(optimalMeetingTime(example_users2, 1, 0, 500));
-console.log(optimalMeetingTime(example_users3, 1, 0, 500));
-console.log(optimalMeetingTime(example_users4, 1, 0, 500));
-console.log(optimalMeetingTime(example_users5, 1, 0, 500));
-console.log(optimalMeetingTime(example_users6, 1, 0, 500));
-
-console.log(optimalMeetingTime(example_users7, 1, 0, 500));
-*/
