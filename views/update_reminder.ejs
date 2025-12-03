@@ -6,6 +6,7 @@
     <title>Manage Reminders</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href = "/public/css/style.css">
+    <link rel="icon" href="/public/images/favicon.png" type="image/png"> 
 
   </head>
   <body>
@@ -24,7 +25,7 @@
             <select class="selectpicker" data-live-search="true" id="nameSelect" required>
               <option value="" disabled selected>Select a friend...</option>
               <% friends.forEach(friend => { %>
-              <option><%= friend.name %></option>
+              <option value="<%= friend.name %>"><%= friend.name %></option>
               <% })%>
             </select>
           </div>
@@ -63,7 +64,7 @@
             <select class="selectpicker" data-live-search="true" id="nameSelect2">
               <option value="" selected disabled>Select a friend</option>
               <% friends.forEach(friend => { %>
-              <option><%= friend.name %></option>
+              <option value="<%= friend.name %>"><%= friend.name %></option>
               <% })%>
             </select>
           </div>
@@ -100,6 +101,7 @@
       </div>
     </div>
     <br>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/public/js/update_reminder.js"></script>
 </body>
