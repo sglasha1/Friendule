@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/finished_calendar.css">
     <link rel="stylesheet" href = "/public/css/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="icon" href="/public/images/favicon.png" type="image/png"> 
+
 </head>
 <body>
     <%- include("partials/header.ejs") %>
@@ -19,15 +21,17 @@
             <div id="sign-in-code">
                 <div>
                     <% if (!user) { %>
-                    <p><a href="../login?next=/finished_calendar/<%= calendar.url %>">Sign in</a> or enter your name: </p>
+                    <p><a href="../login?next=/finished_calendar/<%= calendar.url %>">Sign in</a> to auto-fill or enter your name and press "next" to continue: </p>
                     <% } else { %>
-                    <p>Your name: </p>
+                    <p>Enter your name and press "next" to continue:</p>
                     <% } %>
                 </div>
                 <div>
                     <input id="username" <% if (user) { %> value= <%=user%> <%}%> placeholder = "What should we call you?">
+                    
                 </div>
                 <p id="error"></p>
+                <button id="name_submit">Next</button>
             </div>
             <div id="preferences">
                 <div id="unavailable">
@@ -45,21 +49,24 @@
                 <div>
                     <button id="save"><p>Save</p></button>
                 </div>
+                
             </div>
+            <div id="save_message"></div>
         </div>
+        
 
         <div id="event-info">
             <h3><%=calendar.title%></h3>
             <p><%=calendar.info%></p>
             <p>Happens between <strong><%= (new Date(new Date(calendar.start_date).getTime() + 5 * 60 * 60 * 1000)).toDateString() %></strong> and <strong><%= (new Date(new Date(calendar.end_date).getTime() + 5 * 60 * 60 * 1000)).toDateString() %></strong>, between <strong id="stime"><%= calendar.start_time %></strong> and <strong id="etime"><%= calendar.end_time %></strong>.</p>
-            <div id="button-toggle">
+            <div id="button-toggle" style="display:none;">
                 <button class="optimal-time" id = "bestTime"><p>Calculate Optimal Time</p></button>
                 <button class="optimal-time" id = "groupTimes"><p>Show Group Availability</p></button>
             </div>
             <p id="showBest"></p>
         </div>
     </div>
-    <div id="content">
+    <div id="content" style="display:none;">
         <% function numDays(startDate, endDate) { %>
         <%    const start_date = new Date(startDate); %>
         <%    const end_date = new Date(endDate);%>
@@ -89,7 +96,7 @@
                     <% for (let k = calendar.start_time; k <= calendar.end_time; k++) { %>
                         <div class="hour_timeslot_togglable">
                             <% for (let j = 0; j < 4; j++) { %>
-                                <div class="gray" data-date="<%= i.toString() %>" data-hour="<%= k.toString() %>" data-quarter="<%=j.toString()%>" data-starttime="<%= calendar.start_time.toString() %>" data-startdate= "<%= calendar.start_date %>"></div>
+                                <div class="gray curr_slot" data-date="<%= i.toString() %>" data-hour="<%= k.toString() %>" data-quarter="<%=j.toString()%>" data-starttime="<%= calendar.start_time.toString() %>" data-startdate= "<%= calendar.start_date %>"></div>
                                 
                             <% } %>
                         </div>
