@@ -32,10 +32,12 @@ async function editFriend() {
   const new_desc = document.getElementById('edit_friend_desc').value;
   const image = document.getElementById('update_friend_img').files[0];
 
+  console.log("new desc: ", new_desc);
+
   const formData = new FormData();
   formData.append("curr_name", curr_name);
   formData.append("new_name", new_name);
-  formData.append("desc", new_desc)
+  formData.append("new_desc", new_desc)
   formData.append("image", image);
 
   try {
