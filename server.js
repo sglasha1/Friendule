@@ -752,6 +752,22 @@ app.get("/api2/calendar/:id", async(req, res)=> {
   res.json(row);
 });
 
+app.delete("/api/calendar/delete_curr", async(req, res) => {
+  const hashed_id = req.body.id;
+  const username = req.body.username;
+
+  const sql = 'DELETE FROM calendar_info WHERE hashed_id = ? AND username = ?'
+  DB.run(sql, [hashed_id, username], function (err) {
+      if(err) {
+          console.log("Database error:", err);
+          return res.status(500).send("Database error");
+      }
+      else {
+        return res.status(200).send("OK");
+      }
+    })
+    
+})
 
 app.get("/finished_calendar/:url", async(req, res) => {
   const calendarUrl = req.params.url;
