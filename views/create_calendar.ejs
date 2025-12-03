@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/create_calendar.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href = "/public/css/style.css">
+    <link rel="icon" href="/public/images/favicon.png" type="image/png"> 
 
 </head>
 <body>
@@ -25,7 +26,8 @@
                     <input type="date" id="startDate">
                     <p>Start Time</p>
                     <select name="startTime" id="startTime">
-                        <% for (let i = 1; i <= 12; i++) { %>
+                        <option value="<%= 12 %>">12:00</option>
+                        <% for (let i = 1; i < 12; i++) { %>
                         <option value="<%= i %>"><%= i %>:00</option>
                         <% } %>
                     </select>
@@ -41,7 +43,8 @@
                     <input type="date" id="endDate">
                     <p>End Time</p>
                     <select name="endTime" id="endTime">
-                        <% for (let i = 1; i <= 12; i++) { %>
+                        <option value="<%= 12 %>">12:00</option>
+                        <% for (let i = 1; i < 12; i++) { %>
                         <option value="<%= i %>"><%= i %>:00</option>
                         <% } %>
                     </select>
