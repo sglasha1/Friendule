@@ -97,35 +97,35 @@
 }
 
 .Bad4{
-    background-color: rgb(150, 0, 0);
+    background-color: rgb(185, 33, 33);
 }
 
 .Bad3{
-    background-color: rgb(150, 45, 0);
+    background-color: rgb(233, 96, 38);
 }
 
 .Bad2{
-    background-color: rgb(150, 90, 0);
+    background-color: rgb(238, 159, 40);
 }
 
 .Bad1{
-    background-color: rgb(150, 135, 0);
+    background-color: rgb(231, 210, 27);
 }
 
 .Neutral{
-    background-color: rgb(120, 128, 0);
+    background-color: rgb(228, 221, 147);
 }
 
 .Good1{
-    background-color:rgb(105, 128, 0);
+    background-color:rgb(83, 207, 126);
 }
 
 .Good2{
-    background-color:rgb(70, 128, 0);
+    background-color:rgb(50, 178, 86);
 }
 
 .Good3{
-    background-color:rgb(35, 128, 0);
+    background-color:rgb(32, 135, 56);
 }
 
 .Good4{
