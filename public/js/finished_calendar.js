@@ -101,6 +101,9 @@ function getSlotMS(startDate, startTime, slotDate, slotHour, slotQuarter){
 // default is selecting general availability
 currentColor = "yellowgreen"
 
+// for rectangle method
+let selectionStart = null;
+
 // function to toggle your paintbrush
 async function toggleColor() {
 	document.getElementById(currentColor).innerHTML = "";
@@ -115,23 +118,53 @@ document.getElementById('yellowgreen').addEventListener('click', toggleColor);
 document.getElementById('green').addEventListener('click', toggleColor);
 
 // function to change an individual timeslot's color based on current color
-async function changeColor() {
+function changeColor() {
   console.log("Changing color");
 	this.classList.remove('gray', 'green', 'yellowgreen');
 	this.classList.add(currentColor);
 }
 
-async function changeColorMousedown() {
+function changeColorMousedown() {
 	isSelecting = true;
+        selectionStart = this;
 	this.classList.remove('gray', 'green', 'yellowgreen');
 	this.classList.add(currentColor);	
 }
 
-async function changeColorMouseover() {
-	if (isSelecting) {
-		this.classList.remove('gray', 'green', 'yellowgreen');
-		this.classList.add(currentColor);	
-	}
+function changeColorMouseover() {
+        if (!isSelecting || !selectionStart) return;
+
+        // Get starting slot coordinates
+        const startX = parseInt(selectionStart.dataset.date);
+        const startY1 = parseInt(selectionStart.dataset.hour);
+        const startY2 = parseInt(selectionStart.dataset.quarter);
+        const startY = startY1 * 4 + startY2;                 
+        
+        // Get current slot coordinates
+        const currentX = parseInt(this.dataset.date);
+        const currentY1 = parseInt(this.dataset.hour);
+        const currentY2 = parseInt(this.dataset.quarter);
+        const currentY = currentY1 * 4 + currentY2;
+
+        // Calculate rectangle bounds
+        const minX = Math.min(startX, currentX);
+        const maxX = Math.max(startX, currentX);
+        const minY = Math.min(startY, currentY);
+        const maxY = Math.max(startY, currentY);
+
+        // Loop over all slots and color the ones inside the rectangle
+        const allSlots = document.querySelectorAll(".hour_timeslot_togglable div");
+        allSlots.forEach(slot => {
+            const slotX = parseInt(slot.dataset.date);
+            const slotY1 = parseInt(slot.dataset.hour);
+            const slotY2 = parseInt(slot.dataset.quarter);
+            const slotY = 4 * slotY1 + slotY2;
+            if (slotX >= minX && slotX <= maxX && slotY >= minY && slotY <= maxY) {
+                slot.classList.remove('gray', 'green', 'yellowgreen');
+                slot.classList.add(currentColor);
+            }
+        });
+
 }
 let isSelecting = false;
 
