@@ -169,15 +169,15 @@
 }
 
 .Bad4{
-    background-color: rgb(129, 7, 7);
+    background-color: rgba(129, 7, 7, 0.692);
 }
 
 .Bad3{
-    background-color: rgb(167, 55, 11);
+    background-color: rgba(167, 55, 11, 0.658);
 }
 
 .Bad2{
-    background-color: rgb(151, 91, 12);
+    background-color: rgba(151, 91, 12, 0.699);
 }
 
 .Bad1{
