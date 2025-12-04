@@ -24,8 +24,12 @@
     <div class="row justify-content-center row-cols-3" style="width: 100%; margin-left: 0%; margin-right: 0%">
         <div class="col text-start">
             <div class="row row-cols-auto">
+                <div class="col"> <button id="toggleInfoBtn1" class="info-toggle">i</button> </div>
                 <div class="col"><h4><strong>My Calendars</strong></h4></div>
                 <div class="col"><p><a href="/create_calendar">Create New</a></p></div>
+            </div>
+            <div class="info-box" style="display: none;" id="infoBox1">
+            You can create a 'calendar' for scheduling an event with friends. You share the link with everyone and you can all input your preferred meeting times.
             </div>
             <% for (let i = 0; i < calendars.length; i++) {%>
               <br>
@@ -80,8 +84,12 @@
         </div>
         <div class="col text-start">
             <div class="row row-cols-auto">
+                <div class="col"> <button id="toggleInfoBtn2" class="info-toggle">i</button> </div>  
                 <div class="col"><h4><strong>Reminders</strong></h4></div>
                 <div class="col"><p><a href="/update_reminder">Create New</a></p></div>
+            </div>
+            <div class="info-box" style="display: none;" id="infoBox2">
+            You can add a 'reminder' that will email you at a specified frequency (e.g. once per month) to remind you to spend time with a certain friend.
             </div>
             <% num_reminders = reminders.length; %>
             <% if(num_reminders === 0){ %>
@@ -118,11 +126,21 @@
             <% const num = friends.length; %>
             <% if(num === 0){ %>
               <div class="row row-cols-auto">
+                <div class="col"> <button id="toggleInfoBtn3" class="info-toggle">i</button> </div>
                 <div class="col"><p>You have no friends ... yet!</p></div>
                 <div class="col"><p><a href="/update_friends">Create New</a></p></div>
             </div>
+            <div class="info-box" style="display: none;" id="infoBox3">
+            You can keep a list of your real-life friends here. Your friend does not need a Friendule account for this. Once you put friends on your list here, you can keep track of when you last saw them.
+            </div>
             <%}else{ %>
-              <h4><strong>All Friends</strong></h4>
+              <div class="row row-cols-auto">
+              <div class="col"> <button id="toggleInfoBtn3" class="info-toggle">i</button> </div>
+              <div class="col"><h4><strong>All Friends</strong></h4></div>
+              </div>
+              <div class="info-box" style="display: none;" id="infoBox3">
+              Now that you have started your list of friends, you keep track of when you last saw them or add reminders to see them.
+              </div>
               <% friends.forEach(friend => { %>
               <div class="row row-cols-3 align-items-center">
                 <div class="col" style="width: 100px;">
