@@ -23,12 +23,13 @@ async function create_email_list() {
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data)
         });
-        const result = await response.json();
-        console.log(result);
-        console.log('success!');
+        if (response.ok) {
+          window.location.href = `/finished_calendar/${url}`;
+        }
       } catch (error) {
         console.error('Error:', error);
       }
+      
 }
 
 document.getElementById('submit').addEventListener('click', create_email_list);

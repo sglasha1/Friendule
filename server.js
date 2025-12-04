@@ -80,7 +80,7 @@ app.route("/send_calendar")
 
   .post(async(req, res) => {
     const {email_list, url} = req.body;
-    const baseUrl = 'http://localhost:1234/send_calendar';
+    const baseUrl = 'https://project-epang1-sglasha1-achong1.onrender.com/send_calendar';
     const fullUrl = `${baseUrl}?url=${url}`;
     console.log(email_list);
     email_list.forEach(email => {   
@@ -102,6 +102,7 @@ app.route("/send_calendar")
         })
     });
     console.log('emails sent!');
+    res.sendStatus(200);
 })
 
 function getUserID(username){

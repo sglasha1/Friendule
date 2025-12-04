@@ -315,6 +315,7 @@ function displayCal() {
   document.getElementById("error").innerText = "";
   display_curr_choices()
   document.getElementById("content").style.display = "flex";
+  document.getElementById("preferences").style.display = "flex";
   document.getElementById("username").disabled = true;
   document.getElementById("button-toggle").style.display = "flex";
   this.disabled = true;
