@@ -40,7 +40,7 @@
                     <% const new_url = "finished_calendar/" + calendars[i].url%> 
                     <p><a href = <%= new_url%>>View Calendar</a></p>
                     <% const new_url2 = "/send_calendar/" + calendars[i].url%>
-                    <p><a href = <%= new_url2%>>Share Calendar</a></p>
+                    <p><a href = "<%= new_url2%>">Share Calendar</a></p>
                 </div>
                 <div class="calendar" data-url = "<%= calendars[i].url %>">
                     <% function numDays(startDate, endDate) { %>
