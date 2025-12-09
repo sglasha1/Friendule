@@ -22,37 +22,50 @@
                 <div class="fill">
                     <p>Event Title</p>
                     <input type="text" placeholder = "Value" id="eventTitle">
-                    <p>Start Date</p>
+                    <p>Earliest Possible Date</p>
                     <input type="date" id="startDate">
-                    <p>Start Time</p>
-                    <select name="startTime" id="startTime">
-                        <option value="<%= 12 %>">12:00</option>
-                        <% for (let i = 1; i < 12; i++) { %>
-                        <option value="<%= i %>"><%= i %>:00</option>
-                        <% } %>
-                    </select>
-                    <select name="startTimeAMPM" id="startTimeAMPM">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
                 </div>
                 <div class="fill">
                     <p>Event Duration (optional)</p>
                     <input type="number" id="duration" min="15"> minutes
-                    <p>End Date</p>
+                    <p>Latest Possible Date</p>
                     <input type="date" id="endDate">
-                    <p>End Time</p>
-                    <select name="endTime" id="endTime">
-                        <option value="<%= 12 %>">12:00</option>
-                        <% for (let i = 1; i < 12; i++) { %>
-                        <option value="<%= i %>"><%= i %>:00</option>
-                        <% } %>
-                    </select>
-                    <select name="endTimeAMPM" id="endTimeAMPM">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
+                    
                 </div>
+            </div>
+            <br/>
+            <p>Restrict Time of Day? (e.g. only from 9AM to 5PM) </p>
+            <label>
+            <input type="radio" name="showExtra" value="yes" id="yesOption"> Yes
+            </label>
+            <label>
+            <input type="radio" name="showExtra" value="no" id="noOption" checked> No
+            </label>
+            <br/>
+            <div id="extraSection" style="display:none;">
+            <p>Earliest Time</p>
+            <select name="startTime" id="startTime">
+                <option value="<%= 12 %>">12:00</option>
+                <% for (let i = 1; i < 12; i++) { %>
+                <option value="<%= i %>"><%= i %>:00</option>
+                <% } %>
+            </select>
+            <select name="startTimeAMPM" id="startTimeAMPM">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+            <br/>
+            <p>Latest Time</p>
+            <select name="endTime" id="endTime">
+                <option value="<%= 12 %>">12:00</option>
+                <% for (let i = 1; i < 12; i++) { %>
+                <option value="<%= i %>"><%= i %>:00</option>
+                <% } %>
+            </select>
+            <select name="endTimeAMPM" id="endTimeAMPM">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
             </div>
             <div id="event-info">
                 <p>Event info (optional)</p>

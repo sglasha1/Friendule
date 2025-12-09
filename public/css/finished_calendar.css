@@ -169,19 +169,19 @@
 }
 
 .Bad4{
-    background-color: rgb(185, 33, 33);
+    background-color: rgba(196, 39, 39, 0.692);
 }
 
 .Bad3{
-    background-color: rgb(233, 96, 38);
+    background-color: rgba(179, 77, 37, 0.658);
 }
 
 .Bad2{
-    background-color: rgb(238, 159, 40);
+    background-color: rgba(199, 113, 15, 0.699);
 }
 
 .Bad1{
-    background-color: rgb(231, 210, 27);
+    background-color: rgba(230, 192, 68, 0.897);
 }
 
 .Neutral{
@@ -189,7 +189,7 @@
 }
 
 .Good1{
-    background-color:rgb(83, 207, 126);
+    background-color:rgb(153, 207, 83);
 }
 
 .Good2{
@@ -197,13 +197,12 @@
 }
 
 .Good3{
-    background-color:rgb(32, 135, 56);
+    background-color:rgb(61, 135, 32);
 }
 
 .Good4{
     background-color:green;
 }
-
 .flexbox {
     display: flex;
     flex-direction: column;

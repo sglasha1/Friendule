@@ -90,3 +90,11 @@ submitButton.addEventListener('click', async (event) => {
         console.error('Error:', error);
     }
 });
+
+document.getElementById("yesOption").addEventListener("change", () => {
+    document.getElementById("extraSection").style.display = "block";
+  });
+
+  document.getElementById("noOption").addEventListener("change", () => {
+    document.getElementById("extraSection").style.display = "none";
+  });

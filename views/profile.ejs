@@ -24,8 +24,12 @@
     <div class="row justify-content-center row-cols-3" style="width: 100%; margin-left: 0%; margin-right: 0%">
         <div class="col text-start">
             <div class="row row-cols-auto">
+                <div class="col"> <button id="toggleInfoBtn1" class="info-toggle">i</button> </div>
                 <div class="col"><h4><strong>My Calendars</strong></h4></div>
                 <div class="col"><p><a href="/create_calendar">Create New</a></p></div>
+            </div>
+            <div class="info-box" style="display: none;" id="infoBox1">
+            You can create a 'calendar' for scheduling an event with friends. You share the link with everyone and you can all input your preferred meeting times.
             </div>
             <% for (let i = 0; i < calendars.length; i++) {%>
               <br>
@@ -35,6 +39,8 @@
                     <p><%= calendars[i].info%></p>
                     <% const new_url = "finished_calendar/" + calendars[i].url%> 
                     <p><a href = <%= new_url%>>View Calendar</a></p>
+                    <% const new_url2 = "/send_calendar?url=" + calendars[i].url%>
+                    <p><a href = "<%= new_url2%>">Share Calendar</a></p>
                 </div>
                 <div class="calendar" data-url = "<%= calendars[i].url %>">
                     <% function numDays(startDate, endDate) { %>
@@ -80,8 +86,12 @@
         </div>
         <div class="col text-start">
             <div class="row row-cols-auto">
+                <div class="col"> <button id="toggleInfoBtn2" class="info-toggle">i</button> </div>  
                 <div class="col"><h4><strong>Reminders</strong></h4></div>
                 <div class="col"><p><a href="/update_reminder">Create New</a></p></div>
+            </div>
+            <div class="info-box" style="display: none;" id="infoBox2">
+            You can add a 'reminder' that will email you at a specified frequency (e.g. once per month) to remind you to spend time with a certain friend.
             </div>
             <% num_reminders = reminders.length; %>
             <% if(num_reminders === 0){ %>
@@ -118,11 +128,24 @@
             <% const num = friends.length; %>
             <% if(num === 0){ %>
               <div class="row row-cols-auto">
-                <div class="col"><p>You have no friends ... yet!</p></div>
+                <div class="col"> <button id="toggleInfoBtn3" class="info-toggle">i</button> </div>
+                <div class="col"><h4><strong>All Friends</strong></h4></div>
+                
                 <div class="col"><p><a href="/update_friends">Create New</a></p></div>
             </div>
+            
+            <div class="info-box" style="display: none;" id="infoBox3">
+            You can keep a list of your real-life friends here. Your friend does not need a Friendule account for this. Once you put friends on your list here, you can keep track of when you last saw them.
+            </div>
+            <p>You have no friends ... yet!</p>
             <%}else{ %>
-              <h4><strong>All Friends</strong></h4>
+              <div class="row row-cols-auto">
+              <div class="col"> <button id="toggleInfoBtn3" class="info-toggle">i</button> </div>
+              <div class="col"><h4><strong>All Friends</strong></h4></div>
+              </div>
+              <div class="info-box" style="display: none;" id="infoBox3">
+              Now that you have started your list of friends, you keep track of when you last saw them or add reminders to see them.
+              </div>
               <% friends.forEach(friend => { %>
               <div class="row row-cols-3 align-items-center">
                 <div class="col" style="width: 100px;">
@@ -132,8 +155,8 @@
                   <%} %>" style="max-width: 100%;">
                 </div>
                 <div class="col">
-                    <p><%= friend.name %></p>
-                    <button class="friend-details mb-3" data-target="text-<%= friend.id %>">Show Details</button>
+                    <p><h4><%= friend.name %></h4></p>
+                    <button class="friend-details mb-3" data-target="text-<%= friend.id %>" style="background-color:brown">Show Details</button>
                     <% console.log('text-' + friend.id + friend.description) %>
                     <p id="text-<%= friend.id %>" class="hidden"> <%= friend.description %> </p>
                 </div>
@@ -142,9 +165,9 @@
                 </div>
               </div>
               <div class="row mt-2">
-                <p>Last seen <% if (friend.last_seen) { %> <%=friend.last_seen%><% } else { %>unknown<%}%>. Update date below:</p>
+                <p><% if (friend.last_seen) { %> Last seen <strong><%=friend.last_seen%></strong>. Update date below: <%} else { %>Add when you last saw your friend below!<%}%></p>
                 <div id="friend_update_msg-<%= friend.id %>" style="margin-top: -10px; margin-bottom: 5px"></div>
-                <input type="date" class = "last_seen_input" data-friend-id="<%= friend.id %>" style="margin-left: 10px; max-width: 20%;">
+                <input type="date" class = "last_seen_input" data-friend-id="<%= friend.id %>" style="margin-left: 10px; max-width: 25%;">
               </div>
               <hr style="margin-top: 20px; margin-left: 10px; width: 97%;">
               
