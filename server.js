@@ -85,8 +85,8 @@ app.route("/send_calendar")
 
   .post(async(req, res) => {
     const {email_list, url} = req.body;
-    const baseUrl = 'https://project-epang1-sglasha1-achong1.onrender.com/send_calendar';
-    const fullUrl = `${baseUrl}?url=${url}`;
+    const baseUrl = 'https://project-epang1-sglasha1-achong1.onrender.com/finished_calendar';
+    const fullUrl = `${baseUrl}/${url}`;
     const failed_emails = [];
     console.log(email_list);
     email_list.forEach(email => {   
